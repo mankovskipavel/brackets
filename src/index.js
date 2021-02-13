@@ -1,6 +1,7 @@
 module.exports = function check(str, bracketsConfig) {
-  let newst=""
- // while (str!=""){
+  nnn=0
+  if (str.length%2==1) {return false}
+ while (str!=""){
 
     for (let i=0;i<str.length;i++)
     {
@@ -8,16 +9,16 @@ module.exports = function check(str, bracketsConfig) {
       {
         if (i==0){return false}
         newst=str.slice(0,i*2)
-        if (newst.length!=str.length){ 
+        if (newst!=str){ 
          str=str.slice(i*2,str.length)
-        }   
+        }   else str=""
         break   
       }
     }
     if (checkpart(newst,bracketsConfig)==false){return false}
 
 
- // }
+ }
 
   
   return true
@@ -41,8 +42,22 @@ function checkpart(str,bracketsConfig){
 
 function isClosed(st,bc)
 {
-  for (let i=0;i<bc.length;i++)  {
-    if (bc[i][1]==st) {return true}
+  
+   for (let i=0;i<bc.length;i++)  {    
+     
+    if (bc[i][1]==st) {
+      if (bc[i][0]==bc[i][1]){
+        if (nnn==0){
+          nnn=1
+          return false
+        } 
+        else 
+        {
+          nnn=0
+          return true
+        }
+      } else return true
+    }
   }
   return false
 }
